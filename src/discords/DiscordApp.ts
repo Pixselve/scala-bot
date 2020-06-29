@@ -11,7 +11,10 @@ import { CustomMessageEmbed } from "../classes/CustomMessageEmbed";
 import { Main } from "../Main";
 
 @Discord("_", {
-  import: [Path.join(__dirname, "..", "commands", "*.command.ts")],
+  import: [
+    Path.join(__dirname, "..", "commands", "*.command.ts"),
+    Path.join(__dirname, "..", "commands", "*.command.js"),
+  ],
 })
 export class DiscordApp {
   @On("presenceUpdate")
