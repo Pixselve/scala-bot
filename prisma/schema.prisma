@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+    experimentalFeatures = ["connectOrCreate", "transactionApi"]
+
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Activity {
+  applicationID String
+  duration      Int?
+  end           DateTime
+  id            Int         @default(autoincrement()) @id
+  start         DateTime
+  userID        String
+  application   Application @relation(fields: [applicationID], references: [id])
+  user          User        @relation(fields: [userID], references: [discordID])
+}
+
+model Application {
+  id         String     @id
+  image      String?
+  name       String
+  activities Activity[]
+}
+
+model User {
+  discordID  String     @id
+  activities Activity[]
+}
